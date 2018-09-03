@@ -1,0 +1,39 @@
+{
+  "name": "create-transition",
+  "version": "0.1.0",
+  "description": "Create transitions that CSS can't.",
+  "main": "dist/createTransition.js",
+  "module": "dist/createTransition.mjs",
+  "repository": "git@github.com:jiangfengming/create-transition.git",
+  "author": "Jiang Fengming <jiangfengming87@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c rollup.config.esm.mjs && rollup -c rollup.config.umd.mjs"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.5.0",
+    "eslint-config-enough": "^0.3.4",
+    "rollup": "^0.65.0",
+    "rollup-plugin-babel": "^4.0.2"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "loose": true,
+          "modules": false
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "extends": "enough",
+    "env": {
+      "browser": true
+    }
+  }
+}

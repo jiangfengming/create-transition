@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>example</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../dist/createTransition.js"></script>
+<script>
+function gotoTop() {
+  const y = window.scrollY
+  createTransition.createTransition(t => window.scrollTo(0, y - t * y), 300, createTransition.easeInOutQuad)
+}
+
+function gotoBottom() {
+  const y = window.scrollY
+  const d = document.documentElement.scrollHeight - window.innerHeight - window.scrollY
+  createTransition.createTransition(t => window.scrollTo(0, y + t * d), 300, createTransition.easeInOutQuad)
+}
+</script>
+<style>
+body {
+  height: 9999px;
+  background-image: linear-gradient(to bottom, rgba(255,255,0,0.5), rgba(0,0,255,0.5));
+}
+
+.nav {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
+</style>
+</head>
+<body>
+<div class="nav">
+  <button onclick="gotoTop()">go to top</button>
+  <button onclick="gotoBottom()">go to bottom</button>
+</div>
+</body>
+</html>
