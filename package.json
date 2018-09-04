@@ -4,7 +4,10 @@
   "description": "Create transitions that CSS can't.",
   "main": "dist/createTransition.js",
   "module": "dist/createTransition.mjs",
-  "repository": "git@github.com:jiangfengming/create-transition.git",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jiangfengming/create-transition.git"
+  },
   "author": "Jiang Fengming <jiangfengming87@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -35,5 +38,17 @@
     "env": {
       "browser": true
     }
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/jiangfengming/create-transition/issues"
+  },
+  "homepage": "https://github.com/jiangfengming/create-transition#readme",
+  "directories": {
+    "example": "examples"
+  },
+  "keywords": [
+    "transition",
+    "animation",
+    "easing"
+  ]
 }

@@ -64,29 +64,81 @@
 
   var easeOutQuint = easeOut(5); // acceleration until halfway, then deceleration
 
-  var easeInOutQuint = easeInOut(5); // https://gist.github.com/gre/1650294#gistcomment-840635
-  // elastic bounce effect at the beginning
+  var easeInOutQuint = easeInOut(5); // https://github.com/CharlotteGore/functional-easing
 
-  var easeInElastic = function easeInElastic(t) {
-    return (0.04 - 0.04 / t) * Math.sin(25 * t) + 1;
-  }; // elastic bounce effect at the end
-
-  var easeOutElastic = function easeOutElastic(t) {
-    return 0.04 * t / --t * Math.sin(25 * t);
-  }; // elastic bounce effect at the beginning and end
-
-  var easeInOutElastic = function easeInOutElastic(t) {
-    return (t -= 0.5) < 0 ? (0.02 + 0.01 / t) * Math.sin(50 * t) : (0.02 - 0.01 / t) * Math.sin(50 * t) + 1;
-  }; // https://gist.github.com/gre/1650294#gistcomment-840635
-
-  var easeInSin = function easeInSin(t) {
-    return 1 + Math.sin(Math.PI / 2 * t - Math.PI / 2);
+  var easeInSine = function easeInSine(t) {
+    return -1 * Math.cos(t * Math.PI / 2) + 1;
   };
-  var easeOutSin = function easeOutSin(t) {
-    return Math.sin(Math.PI / 2 * t);
+  var easeOutSine = function easeOutSine(t) {
+    return Math.sin(t * Math.PI / 2);
   };
-  var easeInOutSin = function easeInOutSin(t) {
-    return (1 + Math.sin(Math.PI * t - Math.PI / 2)) / 2;
+  var easeInOutSine = function easeInOutSine(t) {
+    return (Math.cos(Math.PI * t) - 1) / -2;
+  }; // https://github.com/yuichiroharai/easeplus-velocity
+  // back
+
+  var generateEaseInBack = function generateEaseInBack(amount) {
+    return function (t) {
+      return t * t * ((amount + 1) * t - amount);
+    };
+  };
+  var generateEaseOutBack = function generateEaseOutBack(amount) {
+    return function (t) {
+      return --t * t * ((amount + 1) * t + amount) + 1;
+    };
+  };
+  var generateEaseInOutBack = function generateEaseInOutBack(amount) {
+    return function (t) {
+      return (t *= 2) < 1 ? 0.5 * (t * t * ((amount + 1) * t - amount)) : 0.5 * ((t -= 2) * t * ((amount + 1) * t + amount) + 2);
+    };
+  };
+  var easeInBack = generateEaseInBack(1.7);
+  var easeOutBack = generateEaseOutBack(1.7);
+  var easeInOutBack = generateEaseInOutBack(1.7 * 1.525); // elastic
+
+  function generateEaseInElastic(amplitude, period) {
+    var pi2 = Math.PI * 2;
+    return function (t) {
+      if (t === 0 || t === 1) return t;
+      var s = period / pi2 * Math.asin(1 / amplitude);
+      return -(amplitude * Math.pow(2, 10 * (t -= 1)) * Math.sin((t - s) * pi2 / period));
+    };
+  }
+  function generateEaseOutElastic(amplitude, period) {
+    var pi2 = Math.PI * 2;
+    return function (t) {
+      if (t === 0 || t === 1) return t;
+      var s = period / pi2 * Math.asin(1 / amplitude);
+      return amplitude * Math.pow(2, -10 * t) * Math.sin((t - s) * pi2 / period) + 1;
+    };
+  }
+  function generateEaseInOutElastic(amplitude, period) {
+    var pi2 = Math.PI * 2;
+    return function (t) {
+      var s = period / pi2 * Math.asin(1 / amplitude);
+      return (t *= 2) < 1 ? -0.5 * (amplitude * Math.pow(2, 10 * (t -= 1)) * Math.sin((t - s) * pi2 / period)) : amplitude * Math.pow(2, -10 * (t -= 1)) * Math.sin((t - s) * pi2 / period) * 0.5 + 1;
+    };
+  }
+  var easeInElastic = generateEaseInElastic(1, 0.3);
+  var easeOutElastic = generateEaseOutElastic(1, 0.3);
+  var easeInOutElastic = generateEaseInOutElastic(1, 0.3 * 1.5); // bounce
+
+  var easeInBounce = function easeInBounce(t) {
+    return 1 - easeOutBounce(1 - t);
+  };
+  var easeOutBounce = function easeOutBounce(t) {
+    if (t < 1 / 2.75) {
+      return 7.5625 * t * t;
+    } else if (t < 2 / 2.75) {
+      return 7.5625 * (t -= 1.5 / 2.75) * t + 0.75;
+    } else if (t < 2.5 / 2.75) {
+      return 7.5625 * (t -= 2.25 / 2.75) * t + 0.9375;
+    } else {
+      return 7.5625 * (t -= 2.625 / 2.75) * t + 0.984375;
+    }
+  };
+  var easeInOutBounce = function easeInOutBounce(t) {
+    return t < 0.5 ? easeInBounce(t * 2) * 0.5 : easeOutBounce(t * 2 - 1) * 0.5 + 0.5;
   };
 
   exports.createTransition = createTransition;
@@ -104,12 +156,24 @@
   exports.easeInQuint = easeInQuint;
   exports.easeOutQuint = easeOutQuint;
   exports.easeInOutQuint = easeInOutQuint;
+  exports.easeInSine = easeInSine;
+  exports.easeOutSine = easeOutSine;
+  exports.easeInOutSine = easeInOutSine;
+  exports.generateEaseInBack = generateEaseInBack;
+  exports.generateEaseOutBack = generateEaseOutBack;
+  exports.generateEaseInOutBack = generateEaseInOutBack;
+  exports.easeInBack = easeInBack;
+  exports.easeOutBack = easeOutBack;
+  exports.easeInOutBack = easeInOutBack;
+  exports.generateEaseInElastic = generateEaseInElastic;
+  exports.generateEaseOutElastic = generateEaseOutElastic;
+  exports.generateEaseInOutElastic = generateEaseInOutElastic;
   exports.easeInElastic = easeInElastic;
   exports.easeOutElastic = easeOutElastic;
   exports.easeInOutElastic = easeInOutElastic;
-  exports.easeInSin = easeInSin;
-  exports.easeOutSin = easeOutSin;
-  exports.easeInOutSin = easeInOutSin;
+  exports.easeInBounce = easeInBounce;
+  exports.easeOutBounce = easeOutBounce;
+  exports.easeInOutBounce = easeInOutBounce;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

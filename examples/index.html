@@ -6,15 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="../dist/createTransition.js"></script>
 <script>
+const { createTransition: transition, easeInOutQuad } = createTransition
+
 function gotoTop() {
   const y = window.scrollY
-  createTransition.createTransition(t => window.scrollTo(0, y - t * y), 300, createTransition.easeInOutQuad)
+  transition(t => window.scrollTo(0, y - t * y), 300, easeInOutQuad)
 }
 
 function gotoBottom() {
   const y = window.scrollY
   const d = document.documentElement.scrollHeight - window.innerHeight - window.scrollY
-  createTransition.createTransition(t => window.scrollTo(0, y + t * d), 300, createTransition.easeInOutQuad)
+  transition(t => window.scrollTo(0, y + t * d), 300, easeInOutQuad)
 }
 </script>
 <style>
