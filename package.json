@@ -49,6 +49,7 @@
   "keywords": [
     "transition",
     "animation",
+    "requestAnimationFrame",
     "easing"
   ]
 }
