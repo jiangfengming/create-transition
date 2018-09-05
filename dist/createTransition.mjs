@@ -69,6 +69,7 @@ var easeOutSine = function easeOutSine(t) {
 var easeInOutSine = function easeInOutSine(t) {
   return (Math.cos(Math.PI * t) - 1) / -2;
 }; // https://github.com/yuichiroharai/easeplus-velocity
+// https://github.com/CreateJS/TweenJS/blob/master/src/tweenjs/Ease.js
 // back
 
 var generateEaseInBack = function generateEaseInBack(amount) {

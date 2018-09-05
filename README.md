@@ -1,9 +1,10 @@
 # create-transition
 Create transition animations that CSS can't.
 
+
 ## Usage
 
-Scroll animation:
+https://jiangfengming.github.io/create-transition/examples/
 ```html
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,7 @@ Scroll animation:
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="../dist/createTransition.js"></script>
 <script>
-const { createTransition: transition, easeInOutQuad } = createTransition
+const { createTransition: transition, easeInOutQuad, easeInOutCubic } = createTransition
 
 function gotoTop() {
   const y = window.scrollY
@@ -25,6 +26,18 @@ function gotoBottom() {
   const d = document.documentElement.scrollHeight - window.innerHeight - window.scrollY
   transition(t => window.scrollTo(0, y + t * d), 300, easeInOutQuad)
 }
+
+function inc() {
+  const num = document.getElementById('num')
+  const n = parseInt(num.value) || 0
+  transition(t => num.value = n + Math.round(100 * t), 2000, easeInOutCubic)
+}
+
+function dec() {
+  const num = document.getElementById('num')
+  const n = parseInt(num.value) || 0
+  transition(t => num.value = n - Math.round(100 * t), 2000, easeInOutCubic)
+}
 </script>
 <style>
 body {
@@ -32,7 +45,7 @@ body {
   background-image: linear-gradient(to bottom, rgba(255,255,0,0.5), rgba(0,0,255,0.5));
 }
 
-.nav {
+.fixed {
   position: fixed;
   top: 10px;
   left: 10px;
@@ -40,9 +53,12 @@ body {
 </style>
 </head>
 <body>
-<div class="nav">
+<div class="fixed">
+  <p><input type="text" id="num" value="0"></p>
   <button onclick="gotoTop()">go to top</button>
   <button onclick="gotoBottom()">go to bottom</button>
+  <button onclick="inc()">increase</button>
+  <button onclick="dec()">decrease</button>
 </div>
 </body>
 </html>
@@ -51,12 +67,20 @@ body {
 ## Import
 
 ```js
-import { createTransition, easeInOutQuad } from 'create-transition'
+import { createTransition, easeInOutQuad /* , ...other easing functions */} from 'create-transition'
+```
+
+If you don't need easing functions:
+
+```js
+import createTransition from 'create-transition'
 ```
 
 ## APIs
 
 ### createTransition(animate, duration, easing = linear)
+Creates a transition between two states. It uses
+[requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame) underneath.
 
 #### Params:
 
@@ -109,6 +133,7 @@ Generates an easeOutElastic function with custom `amplitude` and `period`.
 Generates an easeInOutElastic function with custom `amplitude` and `period`.
 
 ### Preset easing functions
+* linear
 * easeInQuad
 * easeOutQuad
 * easeInOutQuad
@@ -133,3 +158,12 @@ Generates an easeInOutElastic function with custom `amplitude` and `period`.
 * easeInBounce
 * easeOutBounce
 * easeInOutBounce 
+
+Easing functions are collected from:
+* https://gist.github.com/gre/1650294#gistcomment-1806616
+* https://github.com/CharlotteGore/functional-easing/blob/master/penner-easing.js
+* https://github.com/yuichiroharai/easeplus-velocity/blob/master/release/1.2/velocity.easeplus.js
+* https://github.com/CreateJS/TweenJS/blob/master/src/tweenjs/Ease.js
+
+## License
+[MIT](LICENSE)

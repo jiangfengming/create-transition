@@ -61,6 +61,7 @@ export const easeOutQuint = easeOut(5)
 // acceleration until halfway, then deceleration
 export const easeInOutQuint = easeInOut(5)
 
+
 // https://github.com/CharlotteGore/functional-easing
 export const easeInSine = t => -1 * Math.cos(t * Math.PI / 2) + 1
 
@@ -68,7 +69,9 @@ export const easeOutSine = t => Math.sin(t * Math.PI / 2)
 
 export const easeInOutSine = t => (Math.cos(Math.PI * t) - 1) / -2
 
+
 // https://github.com/yuichiroharai/easeplus-velocity
+// https://github.com/CreateJS/TweenJS/blob/master/src/tweenjs/Ease.js
 
 // back
 export const generateEaseInBack = amount => t => t * t * ((amount + 1) * t - amount)
