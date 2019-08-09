@@ -2,65 +2,94 @@
 Create transition animations that CSS can't.
 
 
+## Demo
+https://jiangfengming.github.io/create-transition/examples/
+
 ## Usage
 
-https://jiangfengming.github.io/create-transition/examples/
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>example</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="../dist/createTransition.js"></script>
-<script>
-const { createTransition: transition, easeInOutQuad, easeInOutCubic } = createTransition
+  <head>
+    <meta charset="utf-8" />
+    <title>create-transition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-function gotoTop() {
-  const y = window.scrollY
-  transition(t => window.scrollTo(0, y - t * y), 300, easeInOutQuad)
-}
+    <style>
+    body {
+      height: 9999px;
+      background-image: linear-gradient(to bottom, rgba(255,255,0,0.5), rgba(0,0,255,0.5));
+    }
 
-function gotoBottom() {
-  const y = window.scrollY
-  const d = document.documentElement.scrollHeight - window.innerHeight - window.scrollY
-  transition(t => window.scrollTo(0, y + t * d), 300, easeInOutQuad)
-}
+    .fixed {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+    }
 
-function inc() {
-  const num = document.getElementById('num')
-  const n = parseInt(num.value) || 0
-  transition(t => num.value = n + Math.round(100 * t), 2000, easeInOutCubic)
-}
+    .box {
+      margin-top: 2000px;
+      width: 200px;
+      height: 200px;
+      background: #FF2F92;
+    }
+    </style>
+  </head>
 
-function dec() {
-  const num = document.getElementById('num')
-  const n = parseInt(num.value) || 0
-  transition(t => num.value = n - Math.round(100 * t), 2000, easeInOutCubic)
-}
-</script>
-<style>
-body {
-  height: 9999px;
-  background-image: linear-gradient(to bottom, rgba(255,255,0,0.5), rgba(0,0,255,0.5));
-}
+  <body>
+    <div class="fixed">
+      <p><input type="text" id="num" value="0"></p>
+      <button id="gotoTop">go to top</button>
+      <button id="gotoBottom">go to bottom</button>
+      <button id="inc">increase</button>
+      <button id="dec">decrease</button>
+      <button id="scrollToBox">scroll to box</button>
+    </div>
 
-.fixed {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-}
-</style>
-</head>
-<body>
-<div class="fixed">
-  <p><input type="text" id="num" value="0"></p>
-  <button onclick="gotoTop()">go to top</button>
-  <button onclick="gotoBottom()">go to bottom</button>
-  <button onclick="inc()">increase</button>
-  <button onclick="dec()">decrease</button>
-</div>
-</body>
+    <div class="box"></div>
+
+    <script type="module">
+    import { createTransition, easeInOutQuad, easeInOutCubic } from '/dist/createTransition.mjs'
+
+    document.getElementById('gotoTop').addEventListener('click', gotoTop)
+    document.getElementById('gotoBottom').addEventListener('click', gotoBottom)
+    document.getElementById('inc').addEventListener('click', inc)
+    document.getElementById('dec').addEventListener('click', dec)
+
+    document.getElementById('scrollToBox').addEventListener('click', () =>
+      scrollTo(document.querySelector('.box'), -150)
+    )
+
+    function scrollTo(el, offset = 0) {
+      const y = window.scrollY
+      const d = el.getBoundingClientRect().top + offset
+      createTransition(t => window.scrollTo(0, y + t * d), 300, easeInOutQuad)
+    }
+
+    function gotoTop() {
+      const y = window.scrollY
+      createTransition(t => window.scrollTo(0, y - t * y), 300, easeInOutQuad)
+    }
+
+    function gotoBottom() {
+      const y = window.scrollY
+      const d = document.documentElement.scrollHeight - window.innerHeight - window.scrollY
+      createTransition(t => window.scrollTo(0, y + t * d), 300, easeInOutQuad)
+    }
+
+    function inc() {
+      const num = document.getElementById('num')
+      const n = parseInt(num.value) || 0
+      createTransition(t => num.value = n + Math.round(100 * t), 2000, easeInOutCubic)
+    }
+
+    function dec() {
+      const num = document.getElementById('num')
+      const n = parseInt(num.value) || 0
+      createTransition(t => num.value = n - Math.round(100 * t), 2000, easeInOutCubic)
+    }
+    </script>
+  </body>
 </html>
 ```
 

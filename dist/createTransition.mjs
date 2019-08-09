@@ -137,4 +137,4 @@ var easeInOutBounce = function easeInOutBounce(t) {
 };
 
 export default createTransition;
-export { createTransition, linear, easeInQuad, easeOutQuad, easeInOutQuad, easeInCubic, easeOutCubic, easeInOutCubic, easeInQuart, easeOutQuart, easeInOutQuart, easeInQuint, easeOutQuint, easeInOutQuint, easeInSine, easeOutSine, easeInOutSine, generateEaseInBack, generateEaseOutBack, generateEaseInOutBack, easeInBack, easeOutBack, easeInOutBack, generateEaseInElastic, generateEaseOutElastic, generateEaseInOutElastic, easeInElastic, easeOutElastic, easeInOutElastic, easeInBounce, easeOutBounce, easeInOutBounce };
+export { createTransition, easeInBack, easeInBounce, easeInCubic, easeInElastic, easeInOutBack, easeInOutBounce, easeInOutCubic, easeInOutElastic, easeInOutQuad, easeInOutQuart, easeInOutQuint, easeInOutSine, easeInQuad, easeInQuart, easeInQuint, easeInSine, easeOutBack, easeOutBounce, easeOutCubic, easeOutElastic, easeOutQuad, easeOutQuart, easeOutQuint, easeOutSine, generateEaseInBack, generateEaseInElastic, generateEaseInOutBack, generateEaseInOutElastic, generateEaseOutBack, generateEaseOutElastic, linear };
