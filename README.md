@@ -41,24 +41,26 @@ https://jiangfengming.github.io/create-transition/examples/
       <p><input type="text" id="num" value="0"></p>
       <button id="gotoTop">go to top</button>
       <button id="gotoBottom">go to bottom</button>
+      <button id="scrollToBox">scroll to box</button>
       <button id="inc">increase</button>
       <button id="dec">decrease</button>
-      <button id="scrollToBox">scroll to box</button>
     </div>
 
     <div class="box"></div>
 
     <script type="module">
-    import { createTransition, easeInOutQuad, easeInOutCubic } from '/dist/createTransition.mjs'
+    import { createTransition, easeInOutQuad, easeInOutCubic } from '../dist/createTransition.mjs'
 
     document.getElementById('gotoTop').addEventListener('click', gotoTop)
     document.getElementById('gotoBottom').addEventListener('click', gotoBottom)
-    document.getElementById('inc').addEventListener('click', inc)
-    document.getElementById('dec').addEventListener('click', dec)
 
     document.getElementById('scrollToBox').addEventListener('click', () =>
       scrollTo(document.querySelector('.box'), -150)
     )
+
+    document.getElementById('inc').addEventListener('click', inc)
+    document.getElementById('dec').addEventListener('click', dec)
+
 
     function scrollTo(el, offset = 0) {
       const y = window.scrollY
