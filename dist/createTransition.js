@@ -1,7 +1,3 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
 function createTransition(animate, duration, easing) {
   return new Promise(function (resolve) {
     var start;
@@ -140,36 +136,5 @@ var easeInOutBounce = function easeInOutBounce(t) {
   return t < 0.5 ? easeInBounce(t * 2) * 0.5 : easeOutBounce(t * 2 - 1) * 0.5 + 0.5;
 };
 
-exports.createTransition = createTransition;
-exports.default = createTransition;
-exports.easeInBack = easeInBack;
-exports.easeInBounce = easeInBounce;
-exports.easeInCubic = easeInCubic;
-exports.easeInElastic = easeInElastic;
-exports.easeInOutBack = easeInOutBack;
-exports.easeInOutBounce = easeInOutBounce;
-exports.easeInOutCubic = easeInOutCubic;
-exports.easeInOutElastic = easeInOutElastic;
-exports.easeInOutQuad = easeInOutQuad;
-exports.easeInOutQuart = easeInOutQuart;
-exports.easeInOutQuint = easeInOutQuint;
-exports.easeInOutSine = easeInOutSine;
-exports.easeInQuad = easeInQuad;
-exports.easeInQuart = easeInQuart;
-exports.easeInQuint = easeInQuint;
-exports.easeInSine = easeInSine;
-exports.easeOutBack = easeOutBack;
-exports.easeOutBounce = easeOutBounce;
-exports.easeOutCubic = easeOutCubic;
-exports.easeOutElastic = easeOutElastic;
-exports.easeOutQuad = easeOutQuad;
-exports.easeOutQuart = easeOutQuart;
-exports.easeOutQuint = easeOutQuint;
-exports.easeOutSine = easeOutSine;
-exports.generateEaseInBack = generateEaseInBack;
-exports.generateEaseInElastic = generateEaseInElastic;
-exports.generateEaseInOutBack = generateEaseInOutBack;
-exports.generateEaseInOutElastic = generateEaseInOutElastic;
-exports.generateEaseOutBack = generateEaseOutBack;
-exports.generateEaseOutElastic = generateEaseOutElastic;
-exports.linear = linear;
+export default createTransition;
+export { createTransition, easeInBack, easeInBounce, easeInCubic, easeInElastic, easeInOutBack, easeInOutBounce, easeInOutCubic, easeInOutElastic, easeInOutQuad, easeInOutQuart, easeInOutQuint, easeInOutSine, easeInQuad, easeInQuart, easeInQuint, easeInSine, easeOutBack, easeOutBounce, easeOutCubic, easeOutElastic, easeOutQuad, easeOutQuart, easeOutQuint, easeOutSine, generateEaseInBack, generateEaseInElastic, generateEaseInOutBack, generateEaseInOutElastic, generateEaseOutBack, generateEaseOutElastic, linear };

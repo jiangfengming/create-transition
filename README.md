@@ -39,8 +39,8 @@ https://jiangfengming.github.io/create-transition/examples/
   <body>
     <div class="fixed">
       <p><input type="text" id="num" value="0"></p>
-      <button id="gotoTop">go to top</button>
-      <button id="gotoBottom">go to bottom</button>
+      <button id="scrollToTop">scroll to top</button>
+      <button id="scrollToBottom">scroll to bottom</button>
       <button id="scrollToBox">scroll to box</button>
       <button id="inc">increase</button>
       <button id="dec">decrease</button>
@@ -49,31 +49,31 @@ https://jiangfengming.github.io/create-transition/examples/
     <div class="box"></div>
 
     <script type="module">
-    import { createTransition, easeInOutQuad, easeInOutCubic } from '../dist/createTransition.mjs'
+    import { createTransition, easeInOutQuad, easeInOutCubic } from 'https://unpkg.com/create-transition'
 
-    document.getElementById('gotoTop').addEventListener('click', gotoTop)
-    document.getElementById('gotoBottom').addEventListener('click', gotoBottom)
+    document.getElementById('scrollToTop').addEventListener('click', scrollToTop)
+    document.getElementById('scrollToBottom').addEventListener('click', scrollToBottom)
 
     document.getElementById('scrollToBox').addEventListener('click', () =>
-      scrollTo(document.querySelector('.box'), -150)
+      scrollToElement(document.querySelector('.box'), 150)
     )
 
     document.getElementById('inc').addEventListener('click', inc)
     document.getElementById('dec').addEventListener('click', dec)
 
 
-    function scrollTo(el, offset = 0) {
+    function scrollToElement(el, offset = 0) {
       const y = window.scrollY
-      const d = el.getBoundingClientRect().top + offset
+      const d = el.getBoundingClientRect().top - offset
       createTransition(t => window.scrollTo(0, y + t * d), 300, easeInOutQuad)
     }
 
-    function gotoTop() {
+    function scrollToTop() {
       const y = window.scrollY
       createTransition(t => window.scrollTo(0, y - t * y), 300, easeInOutQuad)
     }
 
-    function gotoBottom() {
+    function scrollToBottom() {
       const y = window.scrollY
       const d = document.documentElement.scrollHeight - window.innerHeight - window.scrollY
       createTransition(t => window.scrollTo(0, y + t * d), 300, easeInOutQuad)

@@ -1,11 +1,10 @@
 import babel from 'rollup-plugin-babel'
 
 export default {
-  input: 'src/index.mjs',
+  input: 'src/index.js',
 
   output: {
-    format: 'cjs',
-    exports: 'named',
+    format: 'esm',
     file: 'dist/createTransition.js'
   },
 
