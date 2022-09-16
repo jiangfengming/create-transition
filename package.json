@@ -1,6 +1,6 @@
 {
   "name": "create-transition",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Create transitions that CSS can't.",
   "main": "dist/index.js",
   "type": "module",
